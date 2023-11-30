@@ -5,7 +5,10 @@ function obtenerPokemon(id) {
         .then((res) => res.json())
         .then((data) => {
             crearPokemon(data);
+            
+
         });
+
 }
 
 function obtenerPokemones(cantidad) {
@@ -39,12 +42,37 @@ function crearPokemon(pokemon) {
 
     contenedorPokemon.appendChild(tarjeta);
 }
-
+ 
 obtenerPokemones(25);
+const name_searched = document.getElementById("Poke_search")
+const searchButton = document.getElementById("search_Button")
 
 
+function BuscarPokemon(name, id) {
+    fetch(`https://pokeapi.co/api/v2/pokemon/${name || id}`)
+        .then((res) => res.json())
+        .then((data) => {  
+        console.log(data)
+crearPokemon(data)
+       }); 
 
-
-
+    }
   
-  
+searchButton.onclick=()=>{
+    if(name_searched.value == ""){
+        alert("ingresa el Nombre del Pokemon")
+    }
+    else{
+    $("div").empty()
+BuscarPokemon(name_searched.value)
+    }
+}
+
+const homeBtn = document.getElementById("home_button")
+
+homeBtn.onclick=()=>{
+    $("div").empty()
+    obtenerPokemones(25)
+}
+
+
