@@ -2,22 +2,30 @@ const contenedorPokemon = document.querySelector(".pokemon-container");
 const spinner = document.querySelector("#spinner");
 const previous = document.querySelector("#previous");
 const next = document.querySelector("#next");
+let currentPage = 1;
 
 let offset = 1;
 let limit = 8;
 
+function actualizarPagina() {
+    removeChildNodes(contenedorPokemon);
+    obtenerPokemones(offset, limit);
+}
+
 previous.addEventListener("click", () => {
     if (offset > 1) {
         offset -= limit;
+        currentPage--;
         removeChildNodes(contenedorPokemon);
-        obtenerPokemones(offset, limit);
+        actualizarPagina();
     }
 });
 
 next.addEventListener("click", () => {
     offset += limit;
+    currentPage++;
     removeChildNodes(contenedorPokemon);
-    obtenerPokemones(offset, limit);
+    actualizarPagina();
 });
 
 function obtenerPokemon(id) {
@@ -176,11 +184,14 @@ BuscarPokemon(name_searched.value)
 
 const homeBtn = document.getElementById("home_button")
 
-homeBtn.onclick=()=>{
+homeBtn.onclick = () => {
     name_searched.value = "";
-    $("div").empty()
-    obtenerPokemones(1, limit)
-}
+    $("div").empty();
+    currentPage = 1; 
+    offset = (currentPage - 1) * limit + 1; 
+    obtenerPokemones(offset, limit);
+};
+
  
 
   
