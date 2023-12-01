@@ -92,16 +92,71 @@ body {
     display: grid;
     grid-template-columns: 1fr 2fr;
     text-align: left;
-  }
+  }.search_wrap{
+	width: 500px;
+	margin: 38px auto;
+}
 
-#Poke_search {
-  padding: 10px;
+.search_wrap .search_box{
+	position: relative;
+	width: 500px;
+	height: 60px;
+}
+
+.search_wrap .search_box .input{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	padding: 10px 20px;
+	border-radius: 3px;
+	font-size: 18px;
+}
+
+.search_wrap .search_box .btn{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 60px;
+	height: 100%;
+  background-color: #af4c4c;
+
+	z-index: 1;
+	cursor: pointer;
+}
+
+.search_wrap .search_box .btn:hover{
+	background: rgb(148, 12, 12);
+
+
+
+}
+
+.search_wrap .search_box .btn.btn_common .fas{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	color: #fff;
+	font-size: 20px;
+}
+
+.search_wrap.search_wrap_1 .search_box .btn{
+	right: 0;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+
+.search_wrap.search_wrap_1 .search_box .input{
+	padding-right: 80px;}
+
+ #Poke_search {
   font-size: 16px;
   border: none;
   border-radius: 5px;
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
+ 
+} 
 
 #search_Button {
   background-color: #af4c4c;
@@ -132,15 +187,22 @@ body {
 }
 
 
-#home_button {
-  background-color: #af4c4c;
-  color: white;
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+
+.search_wrap {
+    display: flex;
 }
+
+#home_button {
+    background-color: #af4c4c;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px; /* Ajusta el margen a tu gusto */
+}
+
 
 .stats-container {
   display: flex;
