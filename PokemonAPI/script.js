@@ -1,41 +1,44 @@
-const contenedorPokemon = document.querySelector(".pokemon-container")
-const spinner = document.querySelector("#spinner"); 
-const previous = document.querySelector("#previous"); 
-const next = document.querySelector("#next"); 
-
+const contenedorPokemon = document.querySelector(".pokemon-container");
+const spinner = document.querySelector("#spinner");
+const previous = document.querySelector("#previous");
+const next = document.querySelector("#next");
 
 let offset = 1;
 let limit = 8;
 
 previous.addEventListener("click", () => {
-    if (offset != 1) {
-       offset -= 9;
-       removeChildNodes(contenedorPokemon);
-    obtenerPokemones(offset, limit); 
+    if (offset > 1) {
+        offset -= limit;
+        removeChildNodes(contenedorPokemon);
+        obtenerPokemones(offset, limit);
     }
-    });
+});
 
 next.addEventListener("click", () => {
-    offset += 9;
+    offset += limit;
     removeChildNodes(contenedorPokemon);
     obtenerPokemones(offset, limit);
 });
 
 function obtenerPokemon(id) {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
-        .then((res) => res.json())
-        .then((data) => {
-            crearPokemon(data);
-            console.log(data);
-            spinner.style.display = "none"; 
-        });
+    return fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
+        .then((res) => res.json());
 }
 
 function obtenerPokemones(offset, limit) {
     spinner.style.display = "block";
-    for (let i = offset; i <= offset + limit; i++) {
-        obtenerPokemon(i);
+    const promises = [];
+    for (let i = offset; i <= offset + limit - 1; i++) {
+        promises.push(obtenerPokemon(i));
     }
+
+    Promise.all(promises)
+        .then((pokemones) => {
+            spinner.style.display = "none";
+            pokemones.forEach((pokemon) => {
+                crearPokemon(pokemon);
+            });
+        });
 }
 
 function crearPokemon(pokemon) {
@@ -65,11 +68,27 @@ function crearPokemon(pokemon) {
     nombre.classList.add("name");
     nombre.textContent = pokemon.name;
 
+    const alturaMetros = pokemon.height / 10;
+    const alturaPies = Math.floor(alturaMetros * 3.28084);
+    const alturaPulgadas = Math.round((alturaMetros * 3.28084 - alturaPies) * 12);
+    const altura = document.createElement("p");
+    altura.innerHTML = `<strong>Altura:</strong> ${alturaPies}' ${alturaPulgadas}"`;
+
+    const pesoKg = pokemon.weight / 10;
+    const pesoLibras = Math.round(pesoKg * 2.20462);
+    const peso = document.createElement("p");
+    peso.innerHTML = `<strong>Peso:</strong> ${pesoLibras} lbs`;
+
+    const tipos = document.createElement("p");
+    tipos.innerHTML = `<strong>Tipo:</strong> ${pokemon.types.map(type => `<span class="${type.type.name}-type">${type.type.name}</span>`).join(" ")}`;
+
     tarjeta.appendChild(contenedorSprite);
     tarjeta.appendChild(numero);
     tarjeta.appendChild(nombre);
+    tarjeta.appendChild(altura);
+    tarjeta.appendChild(peso);
+    tarjeta.appendChild(tipos);
 
-   
     const cardBack = document.createElement("div");
     cardBack.classList.add("pokemon-block-back");
 
@@ -80,12 +99,11 @@ function crearPokemon(pokemon) {
     contenedorPokemon.appendChild(flipCard);
 }
 
-
 function barraProgreso(stats) {
     const statsContainer = document.createElement("div");
     statsContainer.classList.add("stats-container");
 
-    for (let i = 0; i < 3; i++){
+    for (let i = 0; i < 3; i++) {
         const stat = stats[i];
 
         const statPercent = stat.base_state / 2 + "%";
@@ -93,8 +111,8 @@ function barraProgreso(stats) {
         statContainer.classList.add("stat-container");
 
         const statName = document.createElement("div");
+        statName.classList.add("stat-name");
         statName.textContent = stat.stat.name;
-
 
         const progreso = document.createElement("div");
         progreso.classList.add("progreso");
@@ -113,11 +131,16 @@ function barraProgreso(stats) {
         statContainer.appendChild(progreso);
 
         statsContainer.appendChild(statContainer);
-
     }
 
     return statsContainer;
 }
+
+obtenerPokemones(offset, limit);
+
+
+const name_searched = document.getElementById("Poke_search")
+const searchButton = document.getElementById("search_Button")
 
 
 function removeChildNodes(parent) {
@@ -126,8 +149,32 @@ function removeChildNodes(parent) {
     }
 }
 
+function BuscarPokemon(name, id) {
+    fetch(`https://pokeapi.co/api/v2/pokemon/${name || id}`)
+        .then((res) => res.json())
+        .then((data) => {  
+        console.log(data)
+crearPokemon(data)
+       }); 
 
-obtenerPokemones(offset, limit);
+    }
+  
+searchButton.onclick=()=>{
+    if(name_searched.value == ""){
+        alert("ingresa el Nombre del Pokemon")
+    }
+    else{
+    $("div").empty()
+BuscarPokemon(name_searched.value)
+    }
+}
+
+const homeBtn = document.getElementById("home_button")
+
+homeBtn.onclick=()=>{
+    $("div").empty()
+    obtenerPokemones(1, limit)
+}
 
 
 

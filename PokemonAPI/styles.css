@@ -46,6 +46,7 @@ body {
     font-weight: bold;
     font-size: 1.2rem;
   }
+
   
   #spinner {
     display: none;
@@ -92,3 +93,119 @@ body {
     grid-template-columns: 1fr 2fr;
     text-align: left;
   }
+
+#Poke_search {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+#search_Button {
+  background-color: #af4c4c;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#previous a,
+#next a {
+    background-color: #af4c4c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px;
+    text-decoration: none;
+}
+
+#previous a:hover,
+#next a:hover {
+    background-color: rgb(148, 12, 12)
+}
+
+
+#home_button {
+  background-color: #af4c4c;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+  height: 100%;
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.stat-name {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #2c3e50;
+  letter-spacing: 1px;
+  margin-right: 10px;
+}
+
+.barra-progreso {
+  background-color: #3498db;
+  height: 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.stats-container .stat-container {
+  margin-top: 10px;
+}
+
+.stats-container .stat-container:not(:last-child) {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+/* COLORES DE LOS TIPOS */
+
+.water-type { background-color: #6890F0; color: #fff; }
+.fire-type { background-color: #F08030; color: #fff; }
+.grass-type { background-color: #78C850; color: #fff; }
+.electric-type { background-color: #F8D030; color: #000; }
+.poison-type { background-color: #A040A0; color: #fff; }
+.ground-type { background-color: #E0C068; color: #000; }
+.ice-type { background-color: #98D8D8; color: #000; }
+.fighting-type { background-color: #C03028; color: #fff; }
+.psychic-type { background-color: #F85888; color: #fff; }
+.bug-type { background-color: #A8B820; color: #fff; }
+.rock-type { background-color: #B8A038; color: #fff; }
+.ghost-type { background-color: #705898; color: #fff; }
+.steel-type { background-color: #B8B8D0; color: #000; }
+.fairy-type { background-color: #EE99AC; color: #000; }
+.normal-type { background-color: #A8A878; color: #fff; }
+.flying-type { background-color: #A890F0; color: #fff; }
+.poison-type { background-color: #A040A0; color: #fff; }
+.dark-type { background-color: #705848; color: #fff; }
+.dragon-type { background-color: #7038F8; color: #fff; }
+
+
+
