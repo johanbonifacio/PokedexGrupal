@@ -150,12 +150,17 @@ function removeChildNodes(parent) {
 }
 
 function BuscarPokemon(name, id) {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${name || id}`)
+    const name_Lowercased = name.toLowerCase()
+    fetch(`https://pokeapi.co/api/v2/pokemon/${name_Lowercased || id}`)
         .then((res) => res.json())
         .then((data) => {  
         console.log(data)
 crearPokemon(data)
-       }); 
+       })
+       .catch((error)=>{
+        console.error("Error al buscar el Pokémon:", error);
+        alert("Oops, No se encontró ningún Pokémon con ese nombre o ID.");
+       })
 
     }
   
@@ -178,8 +183,4 @@ homeBtn.onclick=()=>{
 }
  
 
-
-
-
-  
   
