@@ -130,6 +130,32 @@ function removeChildNodes(parent) {
 obtenerPokemones(offset, limit);
 
 
+const name_searched = document.getElementById("Poke_search")
+const searchButton = document.getElementById("search_Button")
+
+
+function BuscarPokemon(name, id) {
+    fetch(`https://pokeapi.co/api/v2/pokemon/${name || id}`)
+        .then((res) => res.json())
+        .then((data) => {  
+        console.log(data)
+crearPokemon(data)
+       }); 
+
+    }
+  
+searchButton.onclick=()=>{
+    if(name_searched.value == ""){
+        alert("ingresa el Nombre del Pokemon")
+    }
+    else{
+    $(".pokemon-container").empty()
+BuscarPokemon(name_searched.value)
+    }
+}
+
+ 
+
 
 
 
