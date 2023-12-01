@@ -126,31 +126,6 @@ body {
 	cursor: pointer;
 }
 
-.search_wrap .search_box .btn:hover{
-	background: rgb(148, 12, 12);
-
-
-
-}
-
-.search_wrap .search_box .btn.btn_common .fas{
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%,-50%);
-	color: #fff;
-	font-size: 20px;
-}
-
-.search_wrap.search_wrap_1 .search_box .btn{
-	right: 0;
-	border-top-right-radius: 3px;
-	border-bottom-right-radius: 3px;
-}
-
-.search_wrap.search_wrap_1 .search_box .input{
-	padding-right: 80px;}
-
  #Poke_search {
   font-size: 16px;
   border: none;

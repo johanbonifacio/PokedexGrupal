@@ -139,6 +139,9 @@ function barraProgreso(stats) {
 obtenerPokemones(offset, limit);
 
 
+const name_searched = document.getElementById("Poke_search")
+const searchButton = document.getElementById("search_Button")
+
 
 function removeChildNodes(parent) {
     while (parent.firstChild) {
@@ -146,46 +149,33 @@ function removeChildNodes(parent) {
     }
 }
 
-const homeBtn = document.getElementById("home_button")
-
-homeBtn.onclick=()=>{
-    $(".pokemon-container").empty()
-    obtenerPokemones(1, limit)
-}
-
-
-const name_searched = document.getElementById("Poke_search")
-const searchButton = document.getElementById("search_Button")
-
-
 function BuscarPokemon(name, id) {
-    const name_lowercased = name.toLowerCase();
-
-    let formattedId = id ? id.toString().replace(/^0+/, '') : null;
-
-    formattedId = formattedId.replace(/^0+/, '');
-    fetch(`https://pokeapi.co/api/v2/pokemon/${formattedId ||  name_lowercased}`)
-    .then((res) => res.json())
-    .then((data) => {  
+    fetch(`https://pokeapi.co/api/v2/pokemon/${name || id}`)
+        .then((res) => res.json())
+        .then((data) => {  
         console.log(data)
-     crearPokemon(data)
+crearPokemon(data)
+       }); 
 
-        })
-    .catch((error) => {
-        console.error("Error al buscar el Pokémon:", error);
-        alert("No se encontró ningún Pokémon con ese nombre o ID.");
-    });
-}
+    }
+  
 searchButton.onclick=()=>{
     if(name_searched.value == ""){
         alert("ingresa el Nombre del Pokemon")
     }
     else{
-    $(".pokemon-container").empty()
+    $("div").empty()
 BuscarPokemon(name_searched.value)
     }
 }
 
+const homeBtn = document.getElementById("home_button")
+
+homeBtn.onclick=()=>{
+    name_searched.value = "";
+    $("div").empty()
+    obtenerPokemones(1, limit)
+}
  
 
 
